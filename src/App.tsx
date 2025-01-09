@@ -31,10 +31,10 @@ function App() {
 
   const playSound = (type: "correct" | "wrong" | "win" | "lose") => {
     const sounds: Record<string, string> = {
-      correct: "src/sounds/correct.mp3",
-      wrong: "src/sounds/wrong.mp3",
-      win: "src/sounds/win.mp3",
-      lose: "src/sounds/lose.mp3",
+      correct: "sounds/correct.mp3",
+      wrong: "sounds/wrong.mp3",
+      win: "sounds/win.mp3",
+      lose: "sounds/lose.mp3",
     };
     const audio = new Audio(sounds[type]);
     audio.volume = 0.25;
