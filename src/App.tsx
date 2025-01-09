@@ -29,13 +29,31 @@ function App() {
     .split("")
     .every(letter => guessedLetters.includes(letter));
 
+  const playSound = (type: "correct" | "wrong" | "win" | "lose") => {
+    const sounds: Record<string, string> = {
+      correct: "src/sounds/correct.mp3",
+      wrong: "src/sounds/wrong.mp3",
+      win: "src/sounds/win.mp3",
+      lose: "src/sounds/lose.mp3",
+    };
+    const audio = new Audio(sounds[type]);
+    audio.volume = 0.25;
+    audio.play();
+  };
+
   const addGuessedLetter = useCallback(
     (letter: string) => {
       if (guessedLetters.includes(letter) || isLoser || isWinner) return;
 
       setGuessedLetters(currentLetters => [...currentLetters, letter]);
+
+      if (wordToGuess.includes(letter)) {
+        playSound("correct"); // Sonido cuando la letra es correcta
+      } else {
+        playSound("wrong"); // Sonido cuando la letra es incorrecta
+      }
     },
-    [guessedLetters, isWinner, isLoser]
+    [guessedLetters, isWinner, isLoser, wordToGuess]
   );
 
   useEffect(() => {
@@ -52,7 +70,7 @@ function App() {
     return () => {
       document.removeEventListener("keypress", handler);
     };
-  }, [guessedLetters]);
+  }, [addGuessedLetter]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -70,6 +88,11 @@ function App() {
       document.removeEventListener("keypress", handler);
     };
   }, []);
+
+  useEffect(() => {
+    if (isWinner) playSound("win");
+    if (isLoser) playSound("lose");
+  }, [isWinner, isLoser]);
 
   return (
     <div
@@ -114,11 +137,12 @@ function App() {
           )}
           inactiveLetters={incorrectLetters}
           addGuessedLetter={addGuessedLetter}
+          isWin={isWinner} // O la lógica para determinar si ganó
+          isLose={isLoser} // O la lógica para determinar si perdió
         />
       </div>
     </div>
-  )
-  
+  );
 }
 
 export default App;

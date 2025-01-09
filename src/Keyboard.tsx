@@ -34,6 +34,8 @@ type KeyboardProps = {
   activeLetters: string[]
   inactiveLetters: string[]
   addGuessedLetter: (letter: string) => void
+  isWin: boolean;
+  isLose: boolean
 }
 
 export function Keyboard({
@@ -41,6 +43,8 @@ export function Keyboard({
   inactiveLetters,
   addGuessedLetter,
   disabled = false,
+  isWin,
+  isLose,
 }: KeyboardProps) {
   return (
     <div
