@@ -3,6 +3,7 @@ import { HangmanDrawing } from "./HangmanDrawing";
 import { HangmanWord } from "./HangmanWord";
 import { Keyboard } from "./Keyboard";
 import words from "./wordList.json";
+import { ConfettiSideCannons } from "./Confetti";
 
 // Función para eliminar tildes
 const removeAccents = (str: string) => {
@@ -106,6 +107,7 @@ function App() {
         alignItems: "center",
       }}
     >
+      
       <div
         style={{
           position: "absolute",
@@ -122,6 +124,7 @@ function App() {
       >
         {isWinner && "Ganaste! - Refresca la página para jugar de nuevo"}
         {isLoser && "Perdiste! - Refresca la página para jugar de nuevo"}
+        <ConfettiSideCannons isWinner={isWinner} />
       </div>
       <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
       <HangmanWord
