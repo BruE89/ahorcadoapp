@@ -4,6 +4,7 @@ import { HangmanWord } from "./HangmanWord";
 import { Keyboard } from "./Keyboard";
 import words from "./wordList.json";
 import { ConfettiSideCannons } from "./Confetti";
+import { ButtonHover } from "./ButtonHover";
 
 // Función para eliminar tildes
 const removeAccents = (str: string) => {
@@ -96,6 +97,7 @@ function App() {
   }, [isWinner, isLoser]);
 
   return (
+    // Teclado
     <div
       style={{
         position: "relative", // Necesario para el contenedor padre
@@ -107,23 +109,26 @@ function App() {
         alignItems: "center",
       }}
     >
-      
+      {/* Mensaje de ganador o perdedor */}
       <div
         style={{
           position: "absolute",
-          top: "50%", // Ajusta esto según tus necesidades
-          right: "-200px", // Cambia esto para ajustar la posición horizontal
+          top: "50%",
+          right: "-200px", 
           transform: "translateY(-50%)", // Centra verticalmente
           fontSize: "2rem",
           textAlign: "center",
-          width: "200px", // Ajusta el ancho si es necesario
-          backgroundColor: "white", // Opcional, para un fondo visible
+          width: "300px", // Ancho fijo
+          backgroundColor: "white",
           padding: "1rem",
-          zIndex: 10, // Asegúrate de que esté sobre otros elementos
+          zIndex: 10,
         }}
       >
-        {isWinner && "Ganaste! - Refresca la página para jugar de nuevo"}
-        {isLoser && "Perdiste! - Refresca la página para jugar de nuevo"}
+        {isWinner && "Ganaste!"}
+        {isLoser && "Perdiste!"}
+        <br />
+        {(isWinner || isLoser) && "Haz click aquí para jugar de nuevo"}
+        <ButtonHover />
         <ConfettiSideCannons isWinner={isWinner} />
       </div>
       <HangmanDrawing numberOfGuesses={incorrectLetters.length} />

@@ -1,8 +1,8 @@
 const HEAD = (
   <div
     style={{
-      width: "50px",
-      height: "50px",
+      width: "70px",
+      height: "70px",
       borderRadius: "100%",
       border: "10px solid black",
       position: "absolute",
@@ -93,7 +93,7 @@ type HangmanDrawingProps = {
 
 export function HangmanDrawing({ numberOfGuesses }: HangmanDrawingProps) {
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", top: "10px" }}>
       {BODY_PARTS.slice(0, numberOfGuesses)}
       <div
         style={{
