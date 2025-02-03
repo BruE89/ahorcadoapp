@@ -99,7 +99,7 @@ function App() {
   }, [isWinner, isLoser]);
 
   return (
-    // Teclado
+    // Contenedor Principal
     <div
       style={{
         position: "relative", // Necesario para el contenedor padre
@@ -111,6 +111,7 @@ function App() {
         alignItems: "center",
       }}
     >
+      {/* Contenedor del Boton cambiador de Tema */}
       <div style={{
           position: "absolute",
           top: "50%",
@@ -124,7 +125,8 @@ function App() {
         }}>
         <ThemeButton />
       </div>
-      {/* Mensaje de ganador o perdedor */}
+
+      {/* Contenedor del mensaje Vicotria/Derrota y Boton de Reiniciar*/}
       <div
         style={{
           position: "absolute",
@@ -153,6 +155,8 @@ function App() {
         guessedLetters={guessedLetters}
         wordToGuess={wordToGuess}
       />
+
+      {/* Contenedor del Teclado*/}
       <div style={{ alignSelf: "stretch" }}>
         <Keyboard
           disabled={isWinner || isLoser}
@@ -165,7 +169,9 @@ function App() {
           isLose={isLoser} // O la lógica para determinar si perdió
         />
       </div>
+
     </div>
+    
   );
 }
 

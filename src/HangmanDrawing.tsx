@@ -36,6 +36,9 @@ const LEFT_LEG = (
 
 const BODY_PARTS = [HEAD, BODY, RIGHT_ARM, LEFT_ARM, RIGHT_LEG, LEFT_LEG]
 
+// En este archivo se define el tamaño, color y posicion de las partes del cuerpo
+// del hombre ahorcado
+
 type HangmanDrawingProps = {
   numberOfGuesses: number
 }

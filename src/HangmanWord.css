@@ -1,5 +1,3 @@
-/* HangmanWord.css */
-
 /* Estilos predeterminados (modo claro) */
 .hangman-word {
   display: flex;
@@ -18,7 +16,7 @@
 
 /* El subrayado solo se aplica al contenedor */
 .hangman-word span::after {
-  content: ""; /* El guion bajo */
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -27,7 +25,6 @@
   background-color: black; /* Subrayado negro */
 }
 
-/* Cuando la letra es visible, eliminamos cualquier subrayado extra */
 .hangman-word span span {
   visibility: hidden;
   color: black;
