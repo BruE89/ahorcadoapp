@@ -1,87 +1,36 @@
 const HEAD = (
   <div
-    style={{
-      width: "70px",
-      height: "70px",
-      borderRadius: "100%",
-      border: "10px solid black",
-      position: "absolute",
-      top: "50px",
-      right: "-30px",
-    }}
+    className="w-[70px] h-[70px] rounded-full border-[10px] border-black dark:border-white absolute top-[50px] right-[-30px]"
   />
 )
 
 const BODY = (
   <div
-    style={{
-      width: "10px",
-      height: "100px",
-      background: "black",
-      position: "absolute",
-      top: "120px",
-      right: 0,
-    }}
+    className="w-[10px] h-[100px] bg-black dark:bg-white absolute top-[120px] right-0"
   />
 )
 
 const RIGHT_ARM = (
   <div
-    style={{
-      width: "100px",
-      height: "10px",
-      background: "black",
-      position: "absolute",
-      top: "150px",
-      right: "-100px",
-      rotate: "-30deg",
-      transformOrigin: "left bottom",
-    }}
+    className="w-[100px] h-[10px] bg-black dark:bg-white absolute top-[130px] right-[-90px] -rotate-[30deg] origin-left-bottom"
   />
 )
 
 const LEFT_ARM = (
   <div
-    style={{
-      width: "100px",
-      height: "10px",
-      background: "black",
-      position: "absolute",
-      top: "150px",
-      right: "10px",
-      rotate: "30deg",
-      transformOrigin: "right bottom",
-    }}
+    className="w-[100px] h-[10px] bg-black dark:bg-white absolute top-[130px] right-[0px] rotate-[30deg] origin-right-bottom"
   />
 )
 
 const RIGHT_LEG = (
   <div
-    style={{
-      width: "100px",
-      height: "10px",
-      background: "black",
-      position: "absolute",
-      top: "210px",
-      right: "-90px",
-      rotate: "60deg",
-      transformOrigin: "left bottom",
-    }}
+    className="w-[100px] h-[10px] bg-black dark:bg-white absolute top-[250px] right-[-70px] rotate-[60deg] origin-left-bottom"
   />
 )
 
 const LEFT_LEG = (
   <div
-    style={{
-      width: "100px",
-      height: "10px",
-      background: "black",
-      position: "absolute",
-      top: "210px",
-      right: 0,
-      rotate: "-60deg",
-      transformOrigin: "right bottom",
-    }}
+    className="w-[100px] h-[10px] bg-black dark:bg-white absolute top-[250px] right-[-20px] -rotate-[60deg] origin-right-bottom"
   />
 )
 
@@ -93,35 +42,18 @@ type HangmanDrawingProps = {
 
 export function HangmanDrawing({ numberOfGuesses }: HangmanDrawingProps) {
   return (
-    <div style={{ position: "relative", top: "10px" }}>
+    <div className="relative top-[10px]">
       {BODY_PARTS.slice(0, numberOfGuesses)}
       <div
-        style={{
-          height: "50px",
-          width: "10px",
-          background: "black",
-          position: "absolute",
-          top: 0,
-          right: 0,
-        }}
+        className="h-[50px] w-[10px] bg-black dark:bg-white absolute top-0 right-0"
       />
       <div
-        style={{
-          height: "10px",
-          width: "200px",
-          background: "black",
-          marginLeft: "120px",
-        }}
+        className="h-[10px] w-[200px] bg-black dark:bg-white ml-[120px]"
       />
       <div
-        style={{
-          height: "400px",
-          width: "10px",
-          background: "black",
-          marginLeft: "120px",
-        }}
+        className="h-[400px] w-[10px] bg-black dark:bg-white ml-[120px]"
       />
-      <div style={{ height: "10px", width: "250px", background: "black" }} />
+      <div className="h-[10px] w-[250px] bg-black dark:bg-white" />
     </div>
   )
 }

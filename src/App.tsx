@@ -5,6 +5,8 @@ import { Keyboard } from "./Keyboard";
 import words from "./wordList.json";
 import { ConfettiSideCannons } from "./Confetti";
 import { ButtonHover } from "./ButtonHover";
+import ThemeButton from "./ThemeButton";
+
 
 // Función para eliminar tildes
 const removeAccents = (str: string) => {
@@ -109,6 +111,19 @@ function App() {
         alignItems: "center",
       }}
     >
+      <div style={{
+          position: "absolute",
+          top: "50%",
+          right: "900px", 
+          transform: "translateY(-50%)", // Centra verticalmente
+          fontSize: "2rem",
+          textAlign: "center",
+          width: "100px", // Ancho fijo
+          padding: "1rem",
+          zIndex: 10,
+        }}>
+        <ThemeButton />
+      </div>
       {/* Mensaje de ganador o perdedor */}
       <div
         style={{
@@ -119,10 +134,10 @@ function App() {
           fontSize: "2rem",
           textAlign: "center",
           width: "300px", // Ancho fijo
-          backgroundColor: "white",
           padding: "1rem",
           zIndex: 10,
         }}
+        className="bg-white dark:bg-black" // Fondo blanco en modo claro y gris oscuro en modo oscuro
       >
         {isWinner && "Ganaste!"}
         {isLoser && "Perdiste!"}
@@ -131,6 +146,7 @@ function App() {
         <ButtonHover />
         <ConfettiSideCannons isWinner={isWinner} />
       </div>
+
       <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
       <HangmanWord
         reveal={isLoser}

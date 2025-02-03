@@ -1,3 +1,4 @@
+/* Estilos predeterminados (modo claro) */
 .btn {
   width: 100%;
   border: 3px solid black;
@@ -5,22 +6,43 @@
   aspect-ratio: 1 / 1;
   font-size: 2.5rem;
   text-transform: uppercase;
-  padding: .5rem;
+  padding: 0.5rem;
   font-weight: bold;
   cursor: pointer;
   color: black;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .btn.active {
-  background-color: hsl(200, 100%, 50%);
+  background-color: hsl(200, 100%, 60%); /* Celeste para letras correctas */
   color: white;
 }
 
 .btn.inactive {
-  opacity: .3;
+  opacity: 0.3; /* Gris para letras incorrectas */
 }
 
 .btn:hover:not(:disabled),
 .btn:focus:not(:disabled) {
-  background-color: hsl(200, 100%, 75%);
+  background-color: hsl(200, 100%, 40%);
+}
+
+/* ✅ Soporte para dark mode */
+:global(.dark) .btn {
+  border-color: white;
+  color: white;
+}
+
+:global(.dark) .btn.active {
+  background-color: hsl(200, 100%, 60%);
+  color: white;
+}
+
+:global(.dark) .btn.inactive {
+  opacity: 0.3;
+}
+
+:global(.dark) .btn:hover:not(:disabled),
+:global(.dark) .btn:focus:not(:disabled) {
+  background-color: hsl(200, 100%, 40%);
 }
