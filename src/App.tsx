@@ -7,6 +7,11 @@ import { ConfettiSideCannons } from "./components/Confetti";
 import { ButtonHover } from "./components/ui/ButtonHover";
 import ThemeButton from "./components/ui/ThemeButton";
 
+import correctSound from "./assets/sounds/correct.mp3";
+import wrongSound from "./assets/sounds/wrong.mp3";
+import winSound from "./assets/sounds/win.mp3";
+import loseSound from "./assets/sounds/lose.mp3";
+
 
 // Función para eliminar tildes
 const removeAccents = (str: string) => {
@@ -35,10 +40,10 @@ function App() {
 
   const playSound = (type: "correct" | "wrong" | "win" | "lose") => {
     const sounds: Record<string, string> = {
-      correct: "src/assets/sounds/correct.mp3",
-      wrong: "src/assets/sounds/wrong.mp3",
-      win: "src/assets/sounds/win.mp3",
-      lose: "src/assets/sounds/lose.mp3",
+      correct: correctSound,
+      wrong: wrongSound,
+      win: winSound,
+      lose: loseSound,
     };
     const audio = new Audio(sounds[type]);
     audio.volume = 0.25;
