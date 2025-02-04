@@ -45,18 +45,32 @@ type HangmanDrawingProps = {
 
 export function HangmanDrawing({ numberOfGuesses }: HangmanDrawingProps) {
   return (
+
+    // Aquí se dibujan las partes del cadalso
     <div className="relative top-[10px]">
+
       {BODY_PARTS.slice(0, numberOfGuesses)}
+
       <div
+        //Cuerda
         className="h-[50px] w-[10px] bg-black dark:bg-white absolute top-0 right-0"
       />
+
       <div
+        //Poste superior
         className="h-[10px] w-[200px] bg-black dark:bg-white ml-[120px]"
       />
+
       <div
+        //Mástil principal
         className="h-[400px] w-[10px] bg-black dark:bg-white ml-[120px]"
       />
-      <div className="h-[10px] w-[250px] bg-black dark:bg-white" />
+
+      <div
+        //Base
+        className="h-[10px] w-[250px] bg-black dark:bg-white" 
+      />
+
     </div>
   )
 }

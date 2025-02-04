@@ -1,4 +1,4 @@
-import "./HangmanWord.css";
+import "../styles/HangmanWord.css";
 
 type HangmanWordProps = {
   guessedLetters: string[];

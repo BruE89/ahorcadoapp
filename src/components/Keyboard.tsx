@@ -1,4 +1,4 @@
-import styles from "./Keyboard.module.css"
+import styles from "../styles/Keyboard.module.css";
 
 const KEYS = [
   "a",
@@ -43,8 +43,6 @@ export function Keyboard({
   inactiveLetters,
   addGuessedLetter,
   disabled = false,
-  isWin,
-  isLose,
 }: KeyboardProps) {
   return (
     <div

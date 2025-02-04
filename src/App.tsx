@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-import { HangmanDrawing } from "./HangmanDrawing";
-import { HangmanWord } from "./HangmanWord";
-import { Keyboard } from "./Keyboard";
-import words from "./wordList.json";
-import { ConfettiSideCannons } from "./Confetti";
-import { ButtonHover } from "./ButtonHover";
-import ThemeButton from "./ThemeButton";
+import { HangmanDrawing } from "./components/HangmanDrawing";
+import { HangmanWord } from "./components/HangmanWord";
+import { Keyboard } from "./components/Keyboard";
+import words from "./data/wordList.json";
+import { ConfettiSideCannons } from "./components/Confetti";
+import { ButtonHover } from "./components/ui/ButtonHover";
+import ThemeButton from "./components/ui/ThemeButton";
 
 
 // Función para eliminar tildes
@@ -35,10 +35,10 @@ function App() {
 
   const playSound = (type: "correct" | "wrong" | "win" | "lose") => {
     const sounds: Record<string, string> = {
-      correct: "sounds/correct.mp3",
-      wrong: "sounds/wrong.mp3",
-      win: "sounds/win.mp3",
-      lose: "sounds/lose.mp3",
+      correct: "src/assets/sounds/correct.mp3",
+      wrong: "src/assets/sounds/wrong.mp3",
+      win: "src/assets/sounds/win.mp3",
+      lose: "src/assets/sounds/lose.mp3",
     };
     const audio = new Audio(sounds[type]);
     audio.volume = 0.25;

@@ -1,4 +1,4 @@
-import { InteractiveHoverButton } from "../src/components/ui/interactive-hover-button";
+import { InteractiveHoverButton } from "./interactive-hover-button";
  
 // Aquí se escribe el contenido del boton reiniciador
 export function ButtonHover() {

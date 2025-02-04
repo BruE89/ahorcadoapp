@@ -15,13 +15,14 @@ export function ConfettiSideCannons({ isWinner }: ConfettiSideCannonsProps) {
     const frame = () => {
       if (Date.now() > end) return;
 
+      // Configuracion de los cañones de confetti
       confetti({
-        particleCount: 4,
-        angle: 60,
-        spread: 55,
-        startVelocity: 100,
-        origin: { x: 0, y: 0.7 },
-        colors: colors,
+        particleCount: 4,  //Cantidad de confetti
+        angle: 60,          //Ángulo de disparo
+        spread: 55,         //Ángulo de dispersión
+        startVelocity: 100, //Velocidad inicial
+        origin: { x: 0, y: 0.7 }, //Lugar de origen de los confettis en la pantalla
+        colors: colors,     //Colores del confetti
       });
       confetti({
         particleCount: 4,
