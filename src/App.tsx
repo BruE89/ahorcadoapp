@@ -2,41 +2,49 @@ import { useCallback, useEffect, useState } from "react";
 import { HangmanDrawing } from "./components/HangmanDrawing";
 import { HangmanWord } from "./components/HangmanWord";
 import { Keyboard } from "./components/Keyboard";
-import words from "./data/wordList.json";
+import wordsEs from "./data/wordList.json";
+import wordsEn from "./data/wordListENG.json";
 import { ConfettiSideCannons } from "./components/Confetti";
 import { ButtonHover } from "./components/ui/ButtonHover";
 import ThemeButton from "./components/ui/ThemeButton";
+import LanguageToggleButton from "./components/LanguageToggleButton";
 
 import correctSound from "./assets/sounds/correct.mp3";
 import wrongSound from "./assets/sounds/wrong.mp3";
 import winSound from "./assets/sounds/win.mp3";
 import loseSound from "./assets/sounds/lose.mp3";
-
-
-// Función para eliminar tildes
-const removeAccents = (str: string) => {
-  let normalizedStr = str.normalize('NFD');
-  normalizedStr = normalizedStr.replace(/[\u0300-\u036f]/g, '');
-  return normalizedStr;
-};
-
-function getWord() {
-  const word = words[Math.floor(Math.random() * words.length)];
-  return removeAccents(word);
-}
+import { AnimatedSubscribeButtonDemo } from "./components/ui/suscribeButton";
 
 function App() {
-  const [wordToGuess, setWordToGuess] = useState(getWord);
+  const [language, setLanguage] = useState<"en" | "es">(() => {
+    return (localStorage.getItem("language") as "en" | "es") || "es";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("language", language);
+  }, [language]);
+
+  const removeAccents = (str: string) => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  };
+
+  function getWord(lang: "en" | "es") {
+    const wordList = lang === "es" ? wordsEs : wordsEn;
+    const word = wordList[Math.floor(Math.random() * wordList.length)];
+    return removeAccents(word);
+  }
+
+  const [wordToGuess, setWordToGuess] = useState(() => getWord(language));
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
 
   const incorrectLetters = guessedLetters.filter(
-    letter => !wordToGuess.includes(letter)
+    (letter) => !wordToGuess.includes(letter)
   );
 
   const isLoser = incorrectLetters.length >= 6;
   const isWinner = wordToGuess
     .split("")
-    .every(letter => guessedLetters.includes(letter));
+    .every((letter) => guessedLetters.includes(letter));
 
   const playSound = (type: "correct" | "wrong" | "win" | "lose") => {
     const sounds: Record<string, string> = {
@@ -54,12 +62,12 @@ function App() {
     (letter: string) => {
       if (guessedLetters.includes(letter) || isLoser || isWinner) return;
 
-      setGuessedLetters(currentLetters => [...currentLetters, letter]);
+      setGuessedLetters((currentLetters) => [...currentLetters, letter]);
 
       if (wordToGuess.includes(letter)) {
-        playSound("correct"); // Sonido cuando la letra es correcta
+        playSound("correct");
       } else {
-        playSound("wrong"); // Sonido cuando la letra es incorrecta
+        playSound("wrong");
       }
     },
     [guessedLetters, isWinner, isLoser, wordToGuess]
@@ -83,12 +91,11 @@ function App() {
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      const key = e.key;
-      if (key !== "Enter") return;
+      if (e.key !== "Enter") return;
 
       e.preventDefault();
       setGuessedLetters([]);
-      setWordToGuess(getWord());
+      setWordToGuess(getWord(language));
     };
 
     document.addEventListener("keypress", handler);
@@ -96,18 +103,29 @@ function App() {
     return () => {
       document.removeEventListener("keypress", handler);
     };
-  }, []);
+  }, [language]);
 
   useEffect(() => {
     if (isWinner) playSound("win");
     if (isLoser) playSound("lose");
   }, [isWinner, isLoser]);
 
+  const handleLanguageToggle = () => {
+    const newLanguage = language === "en" ? "es" : "en";
+    setLanguage(newLanguage);
+    setGuessedLetters([]);
+    setWordToGuess(getWord(newLanguage));
+  };
+
+  const handleGameReset = () => {
+    setGuessedLetters([]);
+    setWordToGuess(getWord(language));
+  };
+
   return (
-    // Contenedor Principal
     <div
       style={{
-        position: "relative", // Necesario para el contenedor padre
+        position: "relative",
         maxWidth: "800px",
         display: "flex",
         flexDirection: "column",
@@ -116,41 +134,49 @@ function App() {
         alignItems: "center",
       }}
     >
-      {/* Contenedor del Boton cambiador de Tema */}
-      <div style={{
-          position: "absolute",
-          top: "50%",
-          right: "900px", 
-          transform: "translateY(-50%)", // Centra verticalmente
-          fontSize: "2rem",
-          textAlign: "center",
-          width: "100px", // Ancho fijo
-          padding: "1rem",
-          zIndex: 10,
-        }}>
-        <ThemeButton />
-      </div>
-
-      {/* Contenedor del mensaje Vicotria/Derrota y Boton de Reiniciar*/}
       <div
         style={{
           position: "absolute",
           top: "50%",
-          right: "-200px", 
-          transform: "translateY(-50%)", // Centra verticalmente
+          right: "900px",
+          transform: "translateY(-50%)",
           fontSize: "2rem",
           textAlign: "center",
-          width: "300px", // Ancho fijo
+          width: "100px",
           padding: "1rem",
           zIndex: 10,
         }}
-        className="bg-white dark:bg-black" // Fondo blanco en modo claro y gris oscuro en modo oscuro
       >
-        {isWinner && "Ganaste!"}
-        {isLoser && "Perdiste!"}
+        <AnimatedSubscribeButtonDemo
+          currentLanguage={language}
+          onLanguageToggle={handleLanguageToggle}
+          className="w-36"
+        />
+        <ThemeButton />
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          right: "-200px",
+          transform: "translateY(-50%)",
+          fontSize: "2rem",
+          textAlign: "center",
+          width: "300px",
+          padding: "1rem",
+          zIndex: 10,
+        }}
+        className="bg-white dark:bg-black"
+      >
+        {isWinner && (language === "es" ? "Ganaste!" : "You won!")}
+        {isLoser && (language === "es" ? "Perdiste!" : "You lost!")}
         <br />
-        {(isWinner || isLoser) && "Haz click aquí para jugar de nuevo"}
-        <ButtonHover />
+        {(isWinner || isLoser) &&
+          (language === "es"
+            ? "Haz click aquí para jugar de nuevo"
+            : "Click here to play again")}
+        <ButtonHover onClick={handleGameReset} language={language} />
         <ConfettiSideCannons isWinner={isWinner} />
       </div>
 
@@ -161,22 +187,19 @@ function App() {
         wordToGuess={wordToGuess}
       />
 
-      {/* Contenedor del Teclado*/}
       <div style={{ alignSelf: "stretch" }}>
         <Keyboard
           disabled={isWinner || isLoser}
-          activeLetters={guessedLetters.filter(letter =>
+          activeLetters={guessedLetters.filter((letter) =>
             wordToGuess.includes(letter)
           )}
           inactiveLetters={incorrectLetters}
           addGuessedLetter={addGuessedLetter}
-          isWin={isWinner} // O la lógica para determinar si ganó
-          isLose={isLoser} // O la lógica para determinar si perdió
+          isWin={isWinner}
+          isLose={isLoser}
         />
       </div>
-
     </div>
-    
   );
 }
 

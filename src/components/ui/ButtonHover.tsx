@@ -1,6 +1,19 @@
+import React from "react";
 import { InteractiveHoverButton } from "./interactive-hover-button";
- 
-// Aquí se escribe el contenido del boton reiniciador
-export function ButtonHover() {
-  return <InteractiveHoverButton>Reiniciar</InteractiveHoverButton>;
+
+interface ButtonHoverProps {
+  onClick: () => void;
+  language: "en" | "es";
 }
+
+const ButtonHover: React.FC<ButtonHoverProps> = ({ onClick, language }) => {
+  const buttonText = language === "en" ? "Reset" : "Reiniciar";
+
+  return (
+    <InteractiveHoverButton onClick={onClick}>
+      {buttonText}
+    </InteractiveHoverButton>
+  );
+};
+
+export { ButtonHover };
