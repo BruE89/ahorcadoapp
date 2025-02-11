@@ -18,10 +18,10 @@ export function AnimatedSubscribeButtonDemo({
       className={className} // Pasar className correctamente
     >
       <span className="group inline-flex items-center">
-        English
+        Español
       </span>
       <span className="group inline-flex items-center">
-        Español
+        English
       </span>
     </AnimatedSubscribeButton>
   );

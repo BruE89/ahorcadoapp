@@ -7,7 +7,6 @@ import wordsEn from "./data/wordListENG.json";
 import { ConfettiSideCannons } from "./components/Confetti";
 import { ButtonHover } from "./components/ui/ButtonHover";
 import ThemeButton from "./components/ui/ThemeButton";
-import LanguageToggleButton from "./components/LanguageToggleButton";
 
 import correctSound from "./assets/sounds/correct.mp3";
 import wrongSound from "./assets/sounds/wrong.mp3";
@@ -175,7 +174,7 @@ function App() {
         {(isWinner || isLoser) &&
           (language === "es"
             ? "Haz click aquí para jugar de nuevo"
-            : "Click here to play again")}
+            : "Click here to restart the game")}
         <ButtonHover onClick={handleGameReset} language={language} />
         <ConfettiSideCannons isWinner={isWinner} />
       </div>
