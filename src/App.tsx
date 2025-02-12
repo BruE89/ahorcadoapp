@@ -15,13 +15,8 @@ import loseSound from "./assets/sounds/lose.mp3";
 import { AnimatedSubscribeButtonDemo } from "./components/ui/suscribeButton";
 
 function App() {
-  const [language, setLanguage] = useState<"en" | "es">(() => {
-    return (localStorage.getItem("language") as "en" | "es") || "es";
-  });
-
-  useEffect(() => {
-    localStorage.setItem("language", language);
-  }, [language]);
+  // Always default to Spanish when the app loads
+  const [language, setLanguage] = useState<"en" | "es">("es");
 
   const removeAccents = (str: string) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
