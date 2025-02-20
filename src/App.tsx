@@ -15,7 +15,7 @@ import loseSound from "./assets/sounds/lose.mp3";
 import { AnimatedSubscribeButtonDemo } from "./components/ui/suscribeButton";
 
 function App() {
-  // Always default to Spanish when the app loads
+  // Setear por defecto el idioma español
   const [language, setLanguage] = useState<"en" | "es">("es");
 
   const removeAccents = (str: string) => {
